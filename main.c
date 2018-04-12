@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:27:19 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/11 22:22:31 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/04/12 17:40:11 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,11 +167,13 @@ void	print_segment(int *first, int *second, t_img *img)
 #define X2 400
 #define Y2 100
 
-int		main(void)
+/* int		main(void)
 {
 	t_env	env;
 	int first[3];
 	int second[3];
+
+	printf("nombre : %d\n", ft_count_words("0 0  0  0 0     0 ", ' '));
 
 	env.mlx_ptr = mlx_init();
 	env.win_ptr = mlx_new_window(env.mlx_ptr, WIDTH, HEIGHT, "Ma fenetre de ouf");
@@ -200,4 +202,96 @@ int		main(void)
 	mlx_string_put(env.mlx_ptr, env.win_ptr, 10, 10, WHITE, "coucou");
 	mlx_loop(env.mlx_ptr);
 	return (0);
+}*/
+
+int		get_height(char *file)
+{
+	int		fd;
+	char	*line;
+	int		i;
+
+	if ((fd = open(file, O_RDONLY)) < 0)
+			return (-666); // Erreur d'ouverture du fichier
+	i = 0;
+	while (get_next_line(fd, &line) > 0)
+		i++;
+	close(fd);
+	return(i);
+}
+
+int		get_width(char *file)
+{
+	int		fd;
+	char	*line;
+	int		i;
+
+	if ((fd = open(file, O_RDONLY)) < 0)
+		return (-666); // Erreur d'ouverture du fichier
+	i = 0;
+	if (get_next_line(fd, &line) <= 0)
+		return (-555); // Erreur du gnl
+	i = ft_count_words(line, ' ');
+	close(fd);
+	return(i);
+}
+
+int		if_width_valid(char *line, int width)
+{
+	if (ft_count_words(line, ' ') != width)
+		return (0);
+	return (1);
+}
+
+int		taballoc(int ****tab, int height, int width)
+{
+	int		i;
+	int 	y;
+
+	if (!(*tab = ft_memalloc(height * sizeof(int **))))
+		return (0);
+	i = -1;
+	y = -1;
+	while (++i < height)
+	{
+		if (!(*tab[i] = ft_memalloc(width * sizeof(int *))))
+			return (0);
+		while (++y < width)
+		{
+			if (!(*tab[i][y] = ft_memalloc(3 * sizeof(int))))
+				return (0);
+		}
+		y = -1;
+	}
+	return (1);
+}
+
+int		main(int argc, char **argv)
+{
+	char	*line;
+	int		fd;
+	int		height;
+	int		width;
+	t_env	env;
+	//int		ref;
+
+	if (argc == 2)
+	{
+		height = get_height(argv[1]);
+		width = get_width(argv[1]);
+		printf("height : %d\n", height);
+		printf("width : %d\n", width);
+		// a verifier
+		taballoc(&env.tab, height, width);
+		env.tab[0][0][0] = 666;
+		//printf("contenu de tab[%d][%d][0] : %d\n", 0, 0, env.tab[0][0][0]);
+		if ((fd = open(argv[1], O_RDONLY)) < 0)
+			return (0); // Erreur d'ouverture du fichier
+		while (get_next_line(fd, &line) > 0)
+		{
+			//ft_putendl(line);
+			
+		}
+		close(fd);
+	}
+	return (0); // Sortie du main
 }
