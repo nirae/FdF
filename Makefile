@@ -6,7 +6,7 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:28:24 by ndubouil          #+#    #+#              #
-#    Updated: 2018/04/12 12:29:44 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/04/13 19:15:10 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRC		=	./src/
 #  Files
 HFILES	=	$(H)fdf.h
 MAIN	=	main.c
-SRCS	=	$(SRC)fill_pixel.c
+SRCS	=	$(SRC)fill_pixel.c		\
+			$(SRC)fill_segment.c
 OBJ		=	$(patsubst %.c,%.o,$(SRCS))
 # Name
 NAME	=	fdf

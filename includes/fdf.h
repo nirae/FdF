@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 21:32:41 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/12 16:57:54 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/04/13 19:15:07 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 # define WHITE 0xFFFFFF
 
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1600
+# define HEIGHT 800
 
 typedef struct		s_img
 {
@@ -37,6 +37,13 @@ typedef struct		s_img
 	int				endian;
 }					t_img;
 
+typedef struct		s_pixel
+{
+	int				x;
+	int				y;
+	int				z;
+}					t_pixel;
+
 typedef struct		s_env
 {
 	void			*mlx_ptr;
@@ -46,5 +53,6 @@ typedef struct		s_env
 }					t_env;
 
 void				fill_pixel(t_img *img, int x, int y, int color);
+void				fill_segment(t_img *img, int *first, int *second);
 
 #endif

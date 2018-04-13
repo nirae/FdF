@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 08:37:46 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/12 12:21:14 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/04/13 15:07:42 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libft.h"
 
-# define BUFF_SIZE 4096
+# define BUFF_SIZE 50
 # define T_FILE_BUFF ((t_file *)(tmp->content))->buff
 # define T_FILE_FD ((t_file *)(tmp->content))->fd
 
