@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_pixel.c                                       :+:      :+:    :+:   */
+/*   if_width_valid.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/11 21:56:13 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/17 19:23:26 by ndubouil         ###   ########.fr       */
+/*   Created: 2018/04/17 12:48:20 by ndubouil          #+#    #+#             */
+/*   Updated: 2018/04/17 12:48:35 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	fill_pixel(t_img *img, int x, int y, int color)
+int		if_width_valid(char *line, int width)
 {
-	int pos;
-
-	pos = y * WIDTH + x;
-	img->data[pos] = color;
+	if (ft_count_words(line, ' ') != width)
+		return (0);
+	return (1);
 }

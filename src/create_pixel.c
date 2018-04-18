@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_pixel.c                                       :+:      :+:    :+:   */
+/*   create_pixel.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/11 21:56:13 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/17 19:23:26 by ndubouil         ###   ########.fr       */
+/*   Created: 2018/04/18 17:00:55 by ndubouil          #+#    #+#             */
+/*   Updated: 2018/04/18 17:01:05 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	fill_pixel(t_img *img, int x, int y, int color)
+t_pixel		create_pixel(int x, int y, int z, int color)
 {
-	int pos;
+	t_pixel		pixel;
 
-	pos = y * WIDTH + x;
-	img->data[pos] = color;
+	//if (!(pixel = (t_pixel *)ft_memalloc(sizeof(t_pixel))))
+	//	return (NULL);
+	pixel.x = x;
+	pixel.y = y;
+	pixel.z = z;
+	pixel.color = color;
+
+	return (pixel);
 }

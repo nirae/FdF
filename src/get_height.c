@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_pixel.c                                       :+:      :+:    :+:   */
+/*   get_height.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/11 21:56:13 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/17 19:23:26 by ndubouil         ###   ########.fr       */
+/*   Created: 2018/04/17 12:45:40 by ndubouil          #+#    #+#             */
+/*   Updated: 2018/04/17 12:46:54 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	fill_pixel(t_img *img, int x, int y, int color)
+int		get_height(char *file)
 {
-	int pos;
+	int		fd;
+	char	*line;
+	int		i;
 
-	pos = y * WIDTH + x;
-	img->data[pos] = color;
+	if ((fd = open(file, O_RDONLY)) < 0)
+			return (-666); // Erreur d'ouverture du fichier
+	i = 0;
+	while (get_next_line(fd, &line) > 0)
+		i++;
+	close(fd);
+	return(i);
 }
