@@ -6,13 +6,13 @@
 /*   By: ndubouil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 08:46:11 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/17 19:40:12 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/04/19 18:18:10 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	horizontal(t_pixel first, t_pixel second, t_img *img)
+/*void	horizontal(t_pixel first, t_pixel second, t_img *img)
 {
 	int x;
 	int y;
@@ -73,4 +73,61 @@ void	fill_segment(t_img *img, t_pixel first, t_pixel second)
 		horizontal(first, second, img);
 	else
 		vertical(first, second, img);
+}*/
+
+void	horizontal(t_env *env, t_seg seg)
+{
+	int i;
+
+	seg.cumul = seg.dx / 2 ;
+	i = 0;
+	while (++i <= seg.dx)
+	{
+		seg.x += seg.xinc;
+		seg.cumul += seg.dy;
+		if (seg.cumul >= seg.dx)
+		{
+			seg.cumul -= seg.dx;
+			seg.y += seg.yinc;
+		}
+		fill_pixel(env, seg.x, seg.y, WHITE);
+	}
+}
+
+void	vertical(t_env *env, t_seg seg)
+{
+	int i;
+	
+	seg.cumul = seg.dy / 2;
+	i = 0;
+	while(++i <= seg.dy)
+	{
+		seg.y += seg.yinc;
+		seg.cumul += seg.dx;
+		if (seg.cumul >= seg.dy)
+		{
+			seg.cumul -= seg.dy;
+			seg.x += seg.xinc;
+		}
+		fill_pixel(env, seg.x, seg.y, WHITE);
+	}
+}
+
+void	fill_segment(t_env *env, t_pixel first, t_pixel second)
+{
+	t_seg	seg;
+	
+	seg.x = first.x;
+	seg.y = first.y;
+	seg.dx = second.x - first.x;
+	seg.dy = second.y - first.y;
+	seg.xinc = ( seg.dx > 0 ) ? 1 : -1;
+	seg.yinc = ( seg.dy > 0 ) ? 1 : -1;
+	seg.dx = abs(seg.dx);
+	seg.dy = abs(seg.dy);
+	fill_pixel(env, seg.x, seg.y, WHITE);
+	if ( seg.dx > seg.dy ) 
+		horizontal(env, seg);
+	else
+		vertical(env, seg);
 }

@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 21:32:41 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/18 22:34:32 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/04/19 18:18:11 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,21 @@
 # define HEIGHT 600
 # define MARGIN 160
 
+
+typedef struct		s_seg
+{
+	int				x;
+	int				y;
+	int				dx;
+	int				dy;
+	int				xinc;
+	int				yinc;
+	int				cumul;
+}					t_seg;
+
+/*
+**	Structures for Env
+*/
 typedef struct		s_img
 {
 	void			*img_ptr;
@@ -51,7 +66,8 @@ typedef struct		s_env
 	void			*mlx_ptr;
 	void			*win_ptr;
 	t_img			img;
-	t_pixel			**tab;
+	t_pixel			**or_tab;
+	t_pixel			**curr_tab;
 	int				height;
 	int				width;
 	int				zoom;
@@ -59,8 +75,8 @@ typedef struct		s_env
 	int				start_y;
 }					t_env;
 
-void				fill_pixel(t_img *img, int x, int y, int color);
-void				fill_segment(t_img *img, t_pixel first, t_pixel second);
+void				fill_pixel(t_env *env, int x, int y, int color);
+void				fill_segment(t_env *env, t_pixel first, t_pixel second);
 int					get_height(char *file);
 int					get_width(char *file);
 int					if_width_valid(char *line, int width);
