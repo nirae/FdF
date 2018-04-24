@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 21:32:41 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/24 08:59:56 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/04/24 14:44:14 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@
 # include "libft.h"
 # include "get_next_line.h"
 
-# define WHITE 0xFFFFFF
+# define WHITE		0xFFFFFF
 
-# define WIDTH 1000
-# define HEIGHT 800
-# define MARGIN 160
+# define WIDTH		1000
+# define HEIGHT		800
+# define MARGIN		160
 
+# define ISO		999
+# define PARA		998
 
 typedef struct		s_seg
 {
@@ -71,10 +73,9 @@ typedef struct		s_env
 	int				height;
 	int				width;
 	int				zoom;
-	//int				start_x;
-	//int				start_y;
 	int				curr_start[2];
 	int				or_start[2];
+	int				proj;
 }					t_env;
 
 void				fill_pixel(t_env *env, int x, int y, int color);
@@ -86,9 +87,9 @@ t_pixel				**make_array(int height, int width);
 t_pixel				**parser(int height, int width, char *file);
 t_pixel				create_pixel(int x, int y, int z, int color);
 
-void				set_start(t_env *env, int *xy);
+void				add_start(t_env *env);
 //int					*get_center(t_env *env);
-void				move(t_env, int x, int y);
+void				move_start(t_env *env, int x, int y);
 void				set_default_start(t_env *env);
 
 #endif
