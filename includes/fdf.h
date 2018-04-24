@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 21:32:41 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/19 18:18:11 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/04/24 08:59:56 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 # define WHITE 0xFFFFFF
 
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1000
+# define HEIGHT 800
 # define MARGIN 160
 
 
@@ -71,8 +71,10 @@ typedef struct		s_env
 	int				height;
 	int				width;
 	int				zoom;
-	int				start_x;
-	int				start_y;
+	//int				start_x;
+	//int				start_y;
+	int				curr_start[2];
+	int				or_start[2];
 }					t_env;
 
 void				fill_pixel(t_env *env, int x, int y, int color);
@@ -83,5 +85,10 @@ int					if_width_valid(char *line, int width);
 t_pixel				**make_array(int height, int width);
 t_pixel				**parser(int height, int width, char *file);
 t_pixel				create_pixel(int x, int y, int z, int color);
+
+void				set_start(t_env *env, int *xy);
+//int					*get_center(t_env *env);
+void				move(t_env, int x, int y);
+void				set_default_start(t_env *env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:27:19 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/19 18:18:14 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/04/24 09:00:19 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,7 @@ int			get_start_y(int ymid)
 	return (result);
 }
 */
-void		add_zoom(t_env *env);
+/*void		add_zoom(t_env *env);
 
 void		set_default_zoom(t_env *env)
 {
@@ -270,7 +270,7 @@ void		add_zoom(t_env *env)
 								);
 		}
 	}
-}
+}*/
 
 #define CTE1 1
 #define CTE2 2
@@ -310,13 +310,13 @@ int		deal_key(int key, t_env *env)
 	if (key == 53)
 		exit(0);
 	else if (key == 126)
-		move_start_points(env, 0, -1);
+		move_start(env, 0, -4);
 	else if (key == 125)
-		move_start_points(env, 0, 1);
+		move_start(env, 0, 4);
 	else if (key == 123)
-		move_start_points(env, -1, 0);
+		move_start(env, -4, 0);
 	else if (key == 124)
-		move_start_points(env, 1, 0);
+		move_start(env, 4, 0);
 	else
 		return (0);
 	fill_img(env);
@@ -326,7 +326,7 @@ int		deal_key(int key, t_env *env)
 }
 
 
-/*void		parallel(t_env *env)
+void		parallel(t_env *env)
 {
 	int		i;
 	int		ii;
@@ -355,7 +355,7 @@ int		deal_key(int key, t_env *env)
 		}
 	}
 	set_coor_center(env);
-}*/
+}
 
 void	create_img(t_env *env)
 {
@@ -405,7 +405,7 @@ int		main(int argc, char **argv)
 		set_default_zoom(&env);
 		isometry(&env);
 		//parallel(&env);
-		set_coor_center(&env);
+		set_default_start(&env);
 		//set_start_points(&env, 10, 10);
 		//add_zoom(&env);
 		//env.tab[10][18][0] = 666;
