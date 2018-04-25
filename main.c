@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:27:19 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/24 14:44:07 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/04/25 11:25:37 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -457,8 +457,8 @@ int		main(int argc, char **argv)
 		env.curr_tab = parser(env.height, env.width, argv[1]);
 		set_default_zoom(&env);
 		isometry(&env);
-		set_default_start(&env);
 		//parallel(&env);
+		set_default_start(&env);
 		//set_start_points(&env, 10, 10);
 		//add_zoom(&env);
 		//env.tab[10][18][0] = 666;
