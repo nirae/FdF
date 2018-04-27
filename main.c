@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:27:19 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/25 11:25:37 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/04/27 19:03:11 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,6 @@ int		agrandir_carre(int key, t_env *env)
 	return (0);
 }
 */
-/*int		deal_key(int key, t_env *env)
-{
-	if (key == 53)
-		exit(0);
-	else if (key == 126)
-		env->curr_y -= 1;
-	else if (key == 125)
-		env->curr_y += 1;
-	else if (key == 123)
-		env->curr_x -= 1;
-	else if (key == 124)
-		env->curr_x += 1;
-	else
-		return (0);
-	mlx_pixel_put(env->mlx_ptr, env->win_ptr, env->curr_x, env->curr_y, WHITE);
-	return (0);
-}*/
 /*
 int		gere_mouse(int key, int x, int y, t_env *env)
 {
@@ -121,232 +104,6 @@ int		gere_mouse(int key, int x, int y, t_env *env)
 	return (0);
 }*/
 
-/*
-int		***parser_iso(int height, int width, char *file)
-{
-	int		i;
-	int		y;
-	char	*line;
-	int		fd;
-	char	**tab;
-	int		***result;
-
-	line = NULL;
-	result = make_array(height, width);
-	if ((fd = open(file, O_RDONLY)) < 0)
-			return (0); // Erreur d'ouverture du fichier
-	i = 0;
-	while (i < height)
-	{
-		get_next_line(fd, &line);
-		if (ft_count_words(line, ' ') != width)
-			break; // Erreur a gerer
-		tab = ft_strsplit(line, ' ');
-		y = -1;
-		while (++y < width)
-		{
-			//printf("TOUR NUMERO : %d\n", i);
-			// Remplissage du X
-			int xx = (y * (XY * COEFF)) + DEPARTX;
-			int yy = (i * (XY * COEFF)) + DEPARTY;
-			int zz = ft_atoi(tab[y]);
-			printf("xx : %d, yy : %d, zz : %d\n", xx, yy, zz);
-			result[i][y][2] = zz;
-			result[i][y][0] = (CTE1 * xx - CTE2 * yy);
-			//result[i][y][0] = xx - yy;
-			result[i][y][1] = (-zz + ((CTE1 / 2 + CTE1 % 2) * xx) + ((CTE2 / 2 + CTE2 % 2) * yy));
-			//result[i][y][1] = (xx + yy) / 2;
-			printf("x : %d, y : %d, z : %d\n", result[i][y][0], result[i][y][1], result[i][y][2]);
-		}	
-		//ft_strclr(line);
-		i++;
-	}
-	close(fd);
-	return (result);
-}*/
-/*void		add_start_points(t_env *env);
-
-void		set_coor_center(t_env *env)
-{
-	int xmid;
-	int ymid;
-	
-	xmid = env->curr_tab[env->height / 2][env->width / 2].x;
-	ymid = env->curr_tab[env->height / 2][env->width / 2].y;
-
-	env->start_x = (WIDTH / 2) - xmid;
-	env->start_y = (HEIGHT / 2) - ymid;
-	add_start_points(env);
-}
-
-// Decalage en parametre ex : -10, 10
-void		move_start_points(t_env *env, int x, int y)
-{
-	env->start_x = x;
-	env->start_y = y;
-	add_start_points(env);
-}
-
-void		add_start_points(t_env *env)
-{
-	int		i;
-	int		ii;
-
-	i = -1;
-	while (++i < env->height)
-	{
-		ii = -1;
-		while (++ii < env->width)
-		{
-			env->curr_tab[i][ii] = create_pixel(
-								env->curr_tab[i][ii].x + env->start_x,
-								env->curr_tab[i][ii].y + env->start_y,
-								env->curr_tab[i][ii].z,
-								env->curr_tab[i][ii].color
-								);
-		}
-	}
-
-}*/
-
-/*
-int			get_start_y(int ymid)
-{
-	int result;
-	//int ymax;
-
-	//ymax = (height - 1) * coeff;
-	result = (HEIGHT / 2) - ymid;
-	return (result);
-}
-*/
-void		reset(t_env *env)
-{
-	int		i;
-	int		ii;
-
-	i = -1;
-	while (++i < env->height)
-	{
-		ii = -1;
-		while (++ii < env->width)
-		{
-			//printf("x avant : %d\n", env->curr_tab[i][ii].x);
-			env->curr_tab[i][ii].x = env->or_tab[i][ii].x;
-			//printf("x apres : %d\n", env->curr_tab[i][ii].x);
-			env->curr_tab[i][ii].y = env->or_tab[i][ii].y;
-			env->curr_tab[i][ii].z = env->or_tab[i][ii].z;
-			env->curr_tab[i][ii].color = env->or_tab[i][ii].color;
-		}
-	}
-}
-
-void		add_zoom(t_env *env);
-
-void		reset_zoom(t_env *env)
-{
-	int		i;
-	int		ii;
-
-	i = -1;
-	while (++i < env->height)
-	{
-		ii = -1;
-		while (++ii < env->width)
-		{
-			env->curr_tab[i][ii].x = (env->curr_tab[i][ii].x / env->zoom);
-			env->curr_tab[i][ii].y = (env->curr_tab[i][ii].y / env->zoom);
-		}
-	}
-
-}
-
-void		set_default_zoom(t_env *env)
-{
-	int		y_coeff;
-	int		x_coeff;
-	int		xmax;
-	int		ymax;
-	
-	xmax = env->or_tab[env->height - 1][env->width - 1].x;
-	ymax = env->or_tab[env->height - 1][env->width - 1].y;
-
-	x_coeff = 0;
-	y_coeff = 0;
-	while (xmax * x_coeff <= WIDTH - (MARGIN * 2))
-		x_coeff++;
-	while (ymax * y_coeff <= HEIGHT - (MARGIN * 2))
-		y_coeff++;
-	if (x_coeff < y_coeff)
-		env->zoom = x_coeff / 2;
-	else 
-		env->zoom = y_coeff / 2;
-	add_zoom(env);
-}
-
-void		isometry(t_env *env);
-void		set_zoom(t_env *env, int zoom)
-{
-	//reset_zoom(env);
-	reset(env);
-	env->zoom = zoom;
-	add_zoom(env);
-	isometry(env);
-	add_start(env);
-}
-
-void		add_zoom(t_env *env)
-{
-	int		i;
-	int		ii;
-
-	i = -1;
-	while (++i < env->height)
-	{
-		ii = -1;
-		while (++ii < env->width)
-		{
-			env->curr_tab[i][ii] = create_pixel(
-								env->curr_tab[i][ii].x * env->zoom,
-								env->curr_tab[i][ii].y * env->zoom,
-								env->curr_tab[i][ii].z,
-								env->curr_tab[i][ii].color
-								);
-		}
-	}
-}
-
-#define CTE1 1
-#define CTE2 2
-
-void		isometry(t_env *env)
-{
-	int		i;
-	int		ii;
-	int		x;
-	int		y;
-	int		z;
-
-	i = -1;
-	while (++i < env->height)
-	{
-		ii = -1;
-		while (++ii < env->width)
-		{
-			x = env->curr_tab[i][ii].x;
-			y = env->curr_tab[i][ii].y;
-			z = env->curr_tab[i][ii].z * CTE2;
-			env->curr_tab[i][ii] =
-			create_pixel(
-							(CTE1 * x - CTE2 * y),
-							(-z + ((CTE1 / 2 + CTE1 % 2) * x) + ((CTE2 / 2 + CTE2 % 2) * y)),
-							env->curr_tab[i][ii].z,
-							env->curr_tab[i][ii].color
-						);
-		}
-	}
-}
-
 void	fill_img(t_env *env);
 
 int		deal_key(int key, t_env *env)
@@ -365,43 +122,18 @@ int		deal_key(int key, t_env *env)
 		set_zoom(env, env->zoom + 1);
 	else if (key == 27)
 		set_zoom(env, env->zoom - 1);
+	else if (key == 34)
+		change_proj(env, ISO);
+	else if (key == 35)
+		change_proj(env, PARA);
+	else if (key == 11)
+		change_proj(env, BASIC);
 	else
 		return (0);
 	fill_img(env);
 	mlx_clear_window(env->mlx_ptr, env->win_ptr);
 	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->img.img_ptr, 0, 0);
 	return (0);
-}
-
-
-void		parallel(t_env *env)
-{
-	int		i;
-	int		ii;
-	int		x;
-	int		y;
-	int		z;
-
-	env->curr_tab = env->or_tab;
-	set_default_zoom(env);
-	i = -1;
-	while (++i < env->height)
-	{
-		ii = -1;
-		while (++ii < env->width)
-		{
-			x = env->curr_tab[i][ii].x;
-			y = env->curr_tab[i][ii].y;
-			z = env->curr_tab[i][ii].z;
-			env->curr_tab[i][ii] =
-			create_pixel(
-							(x + (CTE1 * z)),
-							(y + ((CTE1 / 2 + CTE1 % 2) * -z)),
-							env->curr_tab[i][ii].z,
-							env->curr_tab[i][ii].color
-						);
-		}
-	}
 }
 
 void	create_img(t_env *env)
@@ -455,10 +187,11 @@ int		main(int argc, char **argv)
 		// malloc a proteger
 		env.or_tab = parser(env.height, env.width, argv[1]);
 		env.curr_tab = parser(env.height, env.width, argv[1]);
-		set_default_zoom(&env);
+		/*set_default_zoom(&env);
 		isometry(&env);
 		//parallel(&env);
-		set_default_start(&env);
+		set_default_start(&env);*/
+		change_proj(&env, ISO);
 		//set_start_points(&env, 10, 10);
 		//add_zoom(&env);
 		//env.tab[10][18][0] = 666;

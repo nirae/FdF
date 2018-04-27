@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 21:32:41 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/24 14:44:14 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/04/27 15:56:35 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@
 # define HEIGHT		800
 # define MARGIN		160
 
-# define ISO		999
-# define PARA		998
+# define BASIC		999
+# define ISO		998
+# define PARA		997
+
+# define CTE1		1
+# define CTE2		2
 
 typedef struct		s_seg
 {
@@ -86,10 +90,26 @@ int					if_width_valid(char *line, int width);
 t_pixel				**make_array(int height, int width);
 t_pixel				**parser(int height, int width, char *file);
 t_pixel				create_pixel(int x, int y, int z, int color);
-
+// start
 void				add_start(t_env *env);
-//int					*get_center(t_env *env);
 void				move_start(t_env *env, int x, int y);
 void				set_default_start(t_env *env);
+
+// zoom
+void				add_zoom(t_env *env);
+void				set_default_zoom(t_env *env);
+void				reset_zoom(t_env *env);
+void				set_zoom(t_env *env, int zoom);
+
+// projections
+void				isometry(t_env *env);
+void				parallel(t_env *env);
+void				apply_proj(t_env *env, int proj);
+void				change_proj(t_env *env, int proj);
+
+
+void				reset_to_or(t_env *env);
+
+
 
 #endif
