@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:27:19 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/19 18:18:14 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/04/25 11:25:37 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ int		***parser_iso(int height, int width, char *file)
 	close(fd);
 	return (result);
 }*/
-void		add_start_points(t_env *env);
+/*void		add_start_points(t_env *env);
 
 void		set_coor_center(t_env *env)
 {
@@ -207,7 +207,7 @@ void		add_start_points(t_env *env)
 		}
 	}
 
-}
+}*/
 
 /*
 int			get_start_y(int ymid)
@@ -220,7 +220,46 @@ int			get_start_y(int ymid)
 	return (result);
 }
 */
+void		reset(t_env *env)
+{
+	int		i;
+	int		ii;
+
+	i = -1;
+	while (++i < env->height)
+	{
+		ii = -1;
+		while (++ii < env->width)
+		{
+			//printf("x avant : %d\n", env->curr_tab[i][ii].x);
+			env->curr_tab[i][ii].x = env->or_tab[i][ii].x;
+			//printf("x apres : %d\n", env->curr_tab[i][ii].x);
+			env->curr_tab[i][ii].y = env->or_tab[i][ii].y;
+			env->curr_tab[i][ii].z = env->or_tab[i][ii].z;
+			env->curr_tab[i][ii].color = env->or_tab[i][ii].color;
+		}
+	}
+}
+
 void		add_zoom(t_env *env);
+
+void		reset_zoom(t_env *env)
+{
+	int		i;
+	int		ii;
+
+	i = -1;
+	while (++i < env->height)
+	{
+		ii = -1;
+		while (++ii < env->width)
+		{
+			env->curr_tab[i][ii].x = (env->curr_tab[i][ii].x / env->zoom);
+			env->curr_tab[i][ii].y = (env->curr_tab[i][ii].y / env->zoom);
+		}
+	}
+
+}
 
 void		set_default_zoom(t_env *env)
 {
@@ -234,21 +273,26 @@ void		set_default_zoom(t_env *env)
 
 	x_coeff = 0;
 	y_coeff = 0;
-	while (xmax * x_coeff <= HEIGHT - (MARGIN * 2))
+	while (xmax * x_coeff <= WIDTH - (MARGIN * 2))
 		x_coeff++;
 	while (ymax * y_coeff <= HEIGHT - (MARGIN * 2))
 		y_coeff++;
 	if (x_coeff < y_coeff)
-		env->zoom = x_coeff;
+		env->zoom = x_coeff / 2;
 	else 
-		env->zoom = y_coeff;
+		env->zoom = y_coeff / 2;
 	add_zoom(env);
 }
 
+void		isometry(t_env *env);
 void		set_zoom(t_env *env, int zoom)
 {
+	//reset_zoom(env);
+	reset(env);
 	env->zoom = zoom;
 	add_zoom(env);
+	isometry(env);
+	add_start(env);
 }
 
 void		add_zoom(t_env *env)
@@ -310,13 +354,17 @@ int		deal_key(int key, t_env *env)
 	if (key == 53)
 		exit(0);
 	else if (key == 126)
-		move_start_points(env, 0, -1);
+		move_start(env, 0, -6);
 	else if (key == 125)
-		move_start_points(env, 0, 1);
+		move_start(env, 0, 6);
 	else if (key == 123)
-		move_start_points(env, -1, 0);
+		move_start(env, -6, 0);
 	else if (key == 124)
-		move_start_points(env, 1, 0);
+		move_start(env, 6, 0);
+	else if (key == 24)
+		set_zoom(env, env->zoom + 1);
+	else if (key == 27)
+		set_zoom(env, env->zoom - 1);
 	else
 		return (0);
 	fill_img(env);
@@ -326,7 +374,7 @@ int		deal_key(int key, t_env *env)
 }
 
 
-/*void		parallel(t_env *env)
+void		parallel(t_env *env)
 {
 	int		i;
 	int		ii;
@@ -354,8 +402,7 @@ int		deal_key(int key, t_env *env)
 						);
 		}
 	}
-	set_coor_center(env);
-}*/
+}
 
 void	create_img(t_env *env)
 {
@@ -387,6 +434,12 @@ void	fill_img(t_env *env)
 	}
 }
 
+/*void	reset_proj(t_env *env)
+{
+	env->curr_tab = env->or_tab;
+	set_default_zoom;
+}*/
+
 int		main(int argc, char **argv)
 {
 	//int		height;
@@ -401,11 +454,11 @@ int		main(int argc, char **argv)
 		//printf("width : %d\n", width);
 		// malloc a proteger
 		env.or_tab = parser(env.height, env.width, argv[1]);
-		env.curr_tab = env.or_tab;
+		env.curr_tab = parser(env.height, env.width, argv[1]);
 		set_default_zoom(&env);
 		isometry(&env);
 		//parallel(&env);
-		set_coor_center(&env);
+		set_default_start(&env);
 		//set_start_points(&env, 10, 10);
 		//add_zoom(&env);
 		//env.tab[10][18][0] = 666;

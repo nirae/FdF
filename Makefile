@@ -6,7 +6,7 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:28:24 by ndubouil          #+#    #+#              #
-#    Updated: 2018/04/18 17:02:46 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/04/24 08:37:10 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ SRCS	=	$(SRC)fill_pixel.c		\
 			$(SRC)if_width_valid.c	\
 			$(SRC)parser.c			\
 			$(SRC)make_array.c		\
-			$(SRC)create_pixel.c
+			$(SRC)create_pixel.c	\
+			$(SRC)start_points.c
 OBJ		=	$(patsubst %.c,%.o,$(SRCS))
 # Name
 NAME	=	fdf
