@@ -6,7 +6,7 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:28:24 by ndubouil          #+#    #+#              #
-#    Updated: 2018/04/27 15:27:13 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/04/30 22:41:17 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ NAME	=	fdf
 all:		$(NAME)
 		@true
 
-$(NAME):	$(OBJ) $(MAIN) $(HFILES) $(MLX) $(LIBFT) Makefile
+$(NAME):	$(OBJ) $(MAIN) $(H) $(MLX) $(LIBFT) Makefile
 		@echo "Compiling MLX ..."
 		@make -C $(MLX)
 		@echo "Compiling Libft ..."

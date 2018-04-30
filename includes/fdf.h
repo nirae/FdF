@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 21:32:41 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/27 15:56:35 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/04/30 22:40:29 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define PARA		997
 
 # define CTE1		1
-# define CTE2		2
+# define CTE2		1
 
 typedef struct		s_seg
 {
@@ -45,6 +45,7 @@ typedef struct		s_seg
 	int				xinc;
 	int				yinc;
 	int				cumul;
+	int				color;
 }					t_seg;
 
 /*

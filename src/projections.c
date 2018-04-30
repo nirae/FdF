@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 15:24:58 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/27 16:10:32 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/04/30 22:45:20 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void		isometry(t_env *env)
 		{
 			x = env->curr_tab[i][ii].x;
 			y = env->curr_tab[i][ii].y;
-			z = env->curr_tab[i][ii].z * CTE2;
+			z = env->curr_tab[i][ii].z / 2;
 			env->curr_tab[i][ii] =
 			create_pixel(
 							(CTE1 * x - CTE2 * y),
@@ -82,7 +82,7 @@ void		parallel(t_env *env)
 		{
 			x = env->curr_tab[i][ii].x;
 			y = env->curr_tab[i][ii].y;
-			z = env->curr_tab[i][ii].z;
+			z = env->curr_tab[i][ii].z / 2;
 			env->curr_tab[i][ii] =
 			create_pixel(
 							(x + (CTE1 * z)),
