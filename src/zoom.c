@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 15:08:49 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/27 18:55:03 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/01 12:28:04 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void		set_default_zoom(t_env *env)
 		env->zoom = x_coeff / 2;
 	else
 		env->zoom = y_coeff / 2;
+	if (env->zoom < 1)
+		env->zoom = 1;
 	add_zoom(env);
 }
 
