@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 21:32:41 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/30 22:40:29 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/02 13:21:36 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct		s_env
 	int				curr_start[2];
 	int				or_start[2];
 	int				proj;
+	int				z_max;
 }					t_env;
 
 void				fill_pixel(t_env *env, int x, int y, int color);
@@ -89,7 +90,8 @@ int					get_height(char *file);
 int					get_width(char *file);
 int					if_width_valid(char *line, int width);
 t_pixel				**make_array(int height, int width);
-t_pixel				**parser(int height, int width, char *file);
+t_pixel				**parser(int height, int width, char *file, t_env *env);
+void				manage_color(t_env *env);
 t_pixel				create_pixel(int x, int y, int z, int color);
 // start
 void				add_start(t_env *env);

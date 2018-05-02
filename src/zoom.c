@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 15:08:49 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/01 12:28:04 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/02 12:40:31 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		add_zoom(t_env *env)
 			env->curr_tab[i][ii] = create_pixel(
 								env->curr_tab[i][ii].x * env->zoom,
 								env->curr_tab[i][ii].y * env->zoom,
-								env->curr_tab[i][ii].z,
+								env->curr_tab[i][ii].z / env->zoom,
 								env->curr_tab[i][ii].color
 								);
 		}

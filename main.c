@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:27:19 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/27 19:03:11 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/02 13:49:55 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,13 +185,14 @@ int		main(int argc, char **argv)
 		//printf("height : %d\n", height);
 		//printf("width : %d\n", width);
 		// malloc a proteger
-		env.or_tab = parser(env.height, env.width, argv[1]);
-		env.curr_tab = parser(env.height, env.width, argv[1]);
+		env.or_tab = parser(env.height, env.width, argv[1], &env);
+		env.curr_tab = parser(env.height, env.width, argv[1], &env);
+		manage_color(&env);
 		/*set_default_zoom(&env);
 		isometry(&env);
 		//parallel(&env);
 		set_default_start(&env);*/
-		change_proj(&env, ISO);
+		change_proj(&env, BASIC);
 		//set_start_points(&env, 10, 10);
 		//add_zoom(&env);
 		//env.tab[10][18][0] = 666;
