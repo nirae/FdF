@@ -3,77 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fill_segment.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndubouil <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 08:46:11 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/19 18:18:10 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/04/30 22:12:38 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-/*void	horizontal(t_pixel first, t_pixel second, t_img *img)
-{
-	int x;
-	int y;
-	int tmp;
-
-	if (first.x > second.x)
-	{
-		tmp = first.x;
-		first.x = second.x;
-		second.x = tmp;
-		tmp = first.y;
-		first.y = second.y;
-		second.y = tmp;
-	}
-	x = first.x;
-	while (x <= second.x)
-	{
-		y = first.y + ((second.y - first.y) * (x - first.x)) / (second.x - first.x);
-		if (first.z > 0 && second.z > 0)
-			fill_pixel(img, x, y, 0x8DB600);
-		else
-			fill_pixel(img, x, y, WHITE);
-		x++;
-	}
-}
-
-void	vertical(t_pixel first, t_pixel second, t_img *img)
-{
-	int x;
-	int y;
-	int tmp;
-
-	if (first.y > second.y)
-	{
-		tmp = first.x;
-		first.x = second.x;
-		second.x = tmp;
-		tmp = first.y;
-		first.y = second.y;
-		second.y = tmp;
-	}
-	y = first.y;
-	while (y <= second.y)
-	{
-		x = first.x + ((second.x - first.x) * (y - first.y)) / (second.y - first.y);
-		printf("x : %d, y : %d\n", x, y);
-		if (first.z > 0 && second.z > 0)
-			fill_pixel(img, x, y, 0x8DB600);
-		else
-			fill_pixel(img, x, y, WHITE);
-		y++;
-	}
-}
-
-void	fill_segment(t_img *img, t_pixel first, t_pixel second)
-{
-	if ((second.x - first.x) >= abs(second.y - first.y))
-		horizontal(first, second, img);
-	else
-		vertical(first, second, img);
-}*/
 
 void	horizontal(t_env *env, t_seg seg)
 {
@@ -90,14 +27,14 @@ void	horizontal(t_env *env, t_seg seg)
 			seg.cumul -= seg.dx;
 			seg.y += seg.yinc;
 		}
-		fill_pixel(env, seg.x, seg.y, WHITE);
+		fill_pixel(env, seg.x, seg.y, seg.color);
 	}
 }
 
 void	vertical(t_env *env, t_seg seg)
 {
 	int i;
-	
+
 	seg.cumul = seg.dy / 2;
 	i = 0;
 	while(++i <= seg.dy)
@@ -109,14 +46,21 @@ void	vertical(t_env *env, t_seg seg)
 			seg.cumul -= seg.dy;
 			seg.x += seg.xinc;
 		}
-		fill_pixel(env, seg.x, seg.y, WHITE);
+		fill_pixel(env, seg.x, seg.y, seg.color);
 	}
+}
+
+int		calc_color(t_pixel first, t_pixel second)
+{
+	if (first.z > second.z)
+		return (first.color);
+	return (second.color);
 }
 
 void	fill_segment(t_env *env, t_pixel first, t_pixel second)
 {
 	t_seg	seg;
-	
+
 	seg.x = first.x;
 	seg.y = first.y;
 	seg.dx = second.x - first.x;
@@ -125,8 +69,9 @@ void	fill_segment(t_env *env, t_pixel first, t_pixel second)
 	seg.yinc = ( seg.dy > 0 ) ? 1 : -1;
 	seg.dx = abs(seg.dx);
 	seg.dy = abs(seg.dy);
-	fill_pixel(env, seg.x, seg.y, WHITE);
-	if ( seg.dx > seg.dy ) 
+	seg.color = calc_color(first, second);
+	fill_pixel(env, seg.x, seg.y, seg.color);
+	if ( seg.dx > seg.dy )
 		horizontal(env, seg);
 	else
 		vertical(env, seg);
