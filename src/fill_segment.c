@@ -6,56 +6,24 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 08:46:11 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/30 22:12:38 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/07 22:20:48 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	horizontal(t_env *env, t_seg seg)
-{
-	int i;
+static void		horizontal(t_env *env, t_seg seg);
+static void		vertical(t_env *env, t_seg seg);
+static int		calc_color(t_pixel first, t_pixel second);
 
-	seg.cumul = seg.dx / 2 ;
-	i = 0;
-	while (++i <= seg.dx)
-	{
-		seg.x += seg.xinc;
-		seg.cumul += seg.dy;
-		if (seg.cumul >= seg.dx)
-		{
-			seg.cumul -= seg.dx;
-			seg.y += seg.yinc;
-		}
-		fill_pixel(env, seg.x, seg.y, seg.color);
-	}
-}
-
-void	vertical(t_env *env, t_seg seg)
-{
-	int i;
-
-	seg.cumul = seg.dy / 2;
-	i = 0;
-	while(++i <= seg.dy)
-	{
-		seg.y += seg.yinc;
-		seg.cumul += seg.dx;
-		if (seg.cumul >= seg.dy)
-		{
-			seg.cumul -= seg.dy;
-			seg.x += seg.xinc;
-		}
-		fill_pixel(env, seg.x, seg.y, seg.color);
-	}
-}
-
-int		calc_color(t_pixel first, t_pixel second)
-{
-	if (first.z > second.z)
-		return (first.color);
-	return (second.color);
-}
+/*
+**	Put a segment in the MLX image
+**	Params:	struct t_env
+**			t_pixel pixel represent the start point
+**			t_pixel pixel represent the end point
+**
+**	The color of the segment is the color of the point with the biggest Z
+*/
 
 void	fill_segment(t_env *env, t_pixel first, t_pixel second)
 {
@@ -75,4 +43,53 @@ void	fill_segment(t_env *env, t_pixel first, t_pixel second)
 		horizontal(env, seg);
 	else
 		vertical(env, seg);
+}
+
+/*
+** Locale functions for manage differents cases and color
+*/
+
+static void		horizontal(t_env *env, t_seg seg)
+{
+	int i;
+
+	seg.cumul = seg.dx / 2 ;
+	i = 0;
+	while (++i <= seg.dx)
+	{
+		seg.x += seg.xinc;
+		seg.cumul += seg.dy;
+		if (seg.cumul >= seg.dx)
+		{
+			seg.cumul -= seg.dx;
+			seg.y += seg.yinc;
+		}
+		fill_pixel(env, seg.x, seg.y, seg.color);
+	}
+}
+
+static void		vertical(t_env *env, t_seg seg)
+{
+	int i;
+
+	seg.cumul = seg.dy / 2;
+	i = 0;
+	while(++i <= seg.dy)
+	{
+		seg.y += seg.yinc;
+		seg.cumul += seg.dx;
+		if (seg.cumul >= seg.dy)
+		{
+			seg.cumul -= seg.dy;
+			seg.x += seg.xinc;
+		}
+		fill_pixel(env, seg.x, seg.y, seg.color);
+	}
+}
+
+static int		calc_color(t_pixel first, t_pixel second)
+{
+	if (first.z > second.z)
+		return (first.color);
+	return (second.color);
 }

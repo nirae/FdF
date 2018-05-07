@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 15:24:58 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/02 13:42:51 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/04 13:50:55 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void		isometry(t_env *env)
 			x = env->curr_tab[i][ii].x;
 			y = env->curr_tab[i][ii].y;
 			z = env->curr_tab[i][ii].z;
+			printf("z max : %d\n", env->z_max);
 			env->curr_tab[i][ii] =
 			create_pixel(
 							(CTE1 * x - CTE2 * y),
@@ -72,8 +73,6 @@ void		parallel(t_env *env)
 	int		y;
 	int		z;
 
-	env->curr_tab = env->or_tab;
-	set_default_zoom(env);
 	i = -1;
 	while (++i < env->height)
 	{

@@ -6,7 +6,7 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:28:24 by ndubouil          #+#    #+#              #
-#    Updated: 2018/05/02 11:12:06 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/05/07 20:42:44 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,9 @@ SRCS	=	$(SRC)fill_pixel.c		\
 			$(SRC)start_points.c	\
 			$(SRC)reset_to_or.c		\
 			$(SRC)zoom.c			\
-			$(SRC)projections.c
+			$(SRC)projections.c		\
+			$(SRC)fill_square.c		\
+			$(SRC)menu.c
 OBJ		=	$(patsubst %.c,%.o,$(SRCS))
 # Name
 NAME	=	fdf

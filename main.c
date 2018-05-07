@@ -6,50 +6,11 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:27:19 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/02 13:49:55 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/07 22:08:29 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/fdf.h"
-
-/*void	carre(int x, int y, int size_x, int size_y, t_env *env)
-{
-	int a;
-	int b;
-
-	a = x;
-	b = y;
-	while (a < (x + size_x))
-	{
-		fill_pixel(env, a, b, WHITE);
-		a++;
-		if (a == (x + size_x) && b < (y + size_y))
-		{
-			b++;
-			a = x;
-		}
-	}
-}*/
-/*
-int		agrandir_carre(int key, t_env *env)
-{
-	if (key == 53)
-		exit(0);
-	else if (key == 126)
-		env->curr_y -= 1;
-	else if (key == 125)
-		env->curr_y += 1;
-	else if (key == 123)
-		env->curr_x -= 1;
-	else if (key == 124)
-		env->curr_x += 1;
-	else
-		return (0);
-	mlx_clear_window(env->mlx_ptr, env->win_ptr);
-	carre(env->curr_x, env->curr_y, env->size_x, env->size_y, env);
-	return (0);
-}
-*/
 /*
 int		gere_mouse(int key, int x, int y, t_env *env)
 {
@@ -105,6 +66,7 @@ int		gere_mouse(int key, int x, int y, t_env *env)
 }*/
 
 void	fill_img(t_env *env);
+void	put_to_window(t_env *env);
 
 int		deal_key(int key, t_env *env)
 {
@@ -130,17 +92,13 @@ int		deal_key(int key, t_env *env)
 		change_proj(env, BASIC);
 	else
 		return (0);
-	fill_img(env);
-	mlx_clear_window(env->mlx_ptr, env->win_ptr);
-	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->img.img_ptr, 0, 0);
+	put_to_window(env);
 	return (0);
 }
 
 void	create_img(t_env *env)
 {
-	//if (env->img.img_ptr)
-	//	mlx_destroy_image(env->mlx_ptr, env->img.img_ptr);
-	env->img.img_ptr = mlx_new_image(env->mlx_ptr, WIDTH, HEIGHT);
+	env->img.img_ptr = mlx_new_image(env->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	env->img.data = (int *)mlx_get_data_addr(env->img.img_ptr, &env->img.bpp, 
 				&env->img.size_l, &env->img.endian);
 }
@@ -172,6 +130,15 @@ void	fill_img(t_env *env)
 	set_default_zoom;
 }*/
 
+void	put_to_window(t_env *env)
+{
+	fill_img(env);
+	fill_menu_bars(env);
+	mlx_clear_window(env->mlx_ptr, env->win_ptr);
+	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->img.img_ptr, 0, 0);
+	print_keybinds(env);
+}
+
 int		main(int argc, char **argv)
 {
 	//int		height;
@@ -192,18 +159,22 @@ int		main(int argc, char **argv)
 		isometry(&env);
 		//parallel(&env);
 		set_default_start(&env);*/
-		change_proj(&env, BASIC);
+		change_proj(&env, PARA);
 		//set_start_points(&env, 10, 10);
 		//add_zoom(&env);
 		//env.tab[10][18][0] = 666;
 		//printf("contenu de tab[%d][%d][0] : %d\n", 10, 18, env.tab[11][18].x);
 		env.mlx_ptr = mlx_init();
-		env.win_ptr = mlx_new_window(env.mlx_ptr, WIDTH, HEIGHT, "Ma fenetre de ouf");
+		env.win_ptr = mlx_new_window(env.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Ma fenetre de ouf");
 		//fill_pixel(&env.img, 400, 200, WHITE);
 		//fill_segment(first, second, &env.img);
+		/*
 		fill_img(&env);
+		fill_menu_bars(&env);
 		mlx_put_image_to_window(env.mlx_ptr, env.win_ptr, env.img.img_ptr, 0, 0);
-		mlx_string_put(env.mlx_ptr, env.win_ptr, 10, 10, WHITE, "coucou");
+		//mlx_string_put(env.mlx_ptr, env.win_ptr, 10, 10, WHITE, "coucou");
+		print_menu(&env);*/
+		put_to_window(&env);
 		mlx_hook(env.win_ptr, 2, (1L<<0), deal_key, &env);
 		mlx_loop(env.mlx_ptr);
 	}

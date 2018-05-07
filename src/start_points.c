@@ -6,7 +6,7 @@
 /*   By: ndubouil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 08:10:26 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/04/24 14:44:10 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/07 20:39:22 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void		set_or_center(t_env *env)
 	xmid = env->curr_tab[env->height / 2][env->width / 2].x;
 	ymid = env->curr_tab[env->height / 2][env->width / 2].y;
 
-	env->or_start[0] = (WIDTH / 2) - xmid;
-	env->or_start[1] = (HEIGHT / 2) - ymid;
+	env->or_start[0] = (WIN_WIDTH / 2) - xmid;
+	env->or_start[1] = (WIN_HEIGHT / 2) - ymid;
 }
 
 void		set_curr_center(t_env *env)
@@ -70,8 +70,8 @@ void		set_curr_center(t_env *env)
 	xmid = env->curr_tab[env->height / 2][env->width / 2].x;
 	ymid = env->curr_tab[env->height / 2][env->width / 2].y;
 
-	env->curr_start[0] = (WIDTH / 2) - xmid;
-	env->curr_start[1] = (HEIGHT / 2) - ymid;
+	env->curr_start[0] = (WIN_WIDTH / 2) - xmid;
+	env->curr_start[1] = (WIN_HEIGHT / 2) - ymid;
 }
 
 void		move_start(t_env *env, int x, int y)

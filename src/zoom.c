@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 15:08:49 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/02 12:40:31 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/07 20:40:12 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ void		add_zoom(t_env *env)
 			env->curr_tab[i][ii] = create_pixel(
 								env->curr_tab[i][ii].x * env->zoom,
 								env->curr_tab[i][ii].y * env->zoom,
-								env->curr_tab[i][ii].z / env->zoom,
+								(env->curr_tab[i][ii].z * env->zoom) / (6 + (env->z_max / 10)),
 								env->curr_tab[i][ii].color
 								);
 		}
 	}
+	printf("zoom : %d\n", env->zoom);
 }
 
 /*
@@ -52,9 +53,9 @@ void		set_default_zoom(t_env *env)
 
 	x_coeff = 0;
 	y_coeff = 0;
-	while (xmax * x_coeff <= WIDTH - (MARGIN * 2))
+	while (xmax * x_coeff <= WS_WIDTH)
 		x_coeff++;
-	while (ymax * y_coeff <= HEIGHT - (MARGIN * 2))
+	while (ymax * y_coeff <= WS_HEIGHT)
 		y_coeff++;
 	if (x_coeff < y_coeff)
 		env->zoom = x_coeff / 2;

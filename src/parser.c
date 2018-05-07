@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 12:53:53 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/02 14:18:37 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/07 18:21:54 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 	return (1);
 }*/
 
-int				color(int z, int coeff)
+/*int				color(int z, int coeff)
 {
 	if (z > 10 * coeff)
 		return (0xF5F4F2);
@@ -84,7 +84,54 @@ int				color(int z, int coeff)
 	//else if (z > -90)
 	return (0x71ABD8);
 	//return (WHITE);
+}*/
+
+int				color(int z, int coeff)
+{
+	if (z > 4 * coeff)
+		return (0xF5F4F2);
+	else if (z > 11 * (coeff / 3))
+		return (0xCAC3B8);
+	else if (z > 3 * coeff)
+		return (0xBAAE9A);
+	else if (z > 21 * (coeff / 8))
+		return (0xAC9A7C);
+	else if (z > 2 * coeff)
+		return (0xAA8753);
+	else if (z > 3 * (coeff / 2))
+		return (0xC3A76B);
+	else if (z > 1 * coeff)
+		return (0xD3CA9D);
+	else if (z > 3 * (coeff / 4))
+		return (0xE8E1B6);
+	else if (z > 1 * (coeff / 2))
+		return (0xD1D7AB);
+	else if (z > 1 * (coeff / 4))
+		return (0xBDCC96);
+	else if (z > 1 * (coeff / 8))
+		return (0x94BF8B);
+	else if (z > 0)
+		return (0xACD0A5);
+	else if (z > -1 * (coeff / 8))
+		return (0xD8F2FE);
+	else if (z > -1 * (coeff / 4))
+		return (0xC6ECFF);
+	else if (z > -1 * (coeff / 2))
+		return (0xACDBFB);
+	else if (z > -1 * coeff)
+		return (0xA1D2F7);
+	else if (z > -3 * (coeff / 2))
+		return (0x96C9F0);
+	else if (z > -2 * coeff)
+		return (0x8DC1EA);
+	else if (z > -21 * (coeff / 8))
+		return (0x84B9E3);
+	else if (z > -11 * (coeff / 3))
+		return (0x79B2DE);
+	//else if (z > -4 * coeff)
+	return (0x71ABD8);
 }
+
 
 void			manage_color(t_env *env)
 {
@@ -133,7 +180,7 @@ t_pixel			**parser(int height, int width, char *file, t_env *env)
 	while (++i < height)
 	{
 		get_next_line(fd, &line);
-		ft_putendl(line);
+		//ft_putendl(line);
 		// Pas la bonne longueur
 		if (ft_count_words(line, ' ') != width)
 			break; // Erreur a gerer
