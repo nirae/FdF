@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 15:08:49 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/07 20:40:12 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/08 15:59:26 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void		reset_zoom(t_env *env)
 void		set_zoom(t_env *env, int zoom)
 {
 	//reset_zoom(env);
-	reset_to_or(env);
+	set_or_to_curr(env);
 	env->zoom = zoom;
 	add_zoom(env);
 	printf("proj  : %d\n", env->proj);

@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:27:19 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/07 22:08:29 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/08 18:34:01 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	put_to_window(t_env *env);
 int		deal_key(int key, t_env *env)
 {
 	if (key == 53)
-		exit(0);
+		quit_fdf(env);
 	else if (key == 126)
 		move_start(env, 0, -6);
 	else if (key == 125)
@@ -141,20 +141,19 @@ void	put_to_window(t_env *env)
 
 int		main(int argc, char **argv)
 {
-	//int		height;
-	//int		width;
 	t_env	env;
 
 	if (argc == 2)
 	{
+		// FAIL A GERER
 		env.height = get_height(argv[1]);
+		// FAIL A GERER
 		env.width = get_width(argv[1]);
-		//printf("height : %d\n", height);
-		//printf("width : %d\n", width);
 		// malloc a proteger
 		env.or_tab = parser(env.height, env.width, argv[1], &env);
-		env.curr_tab = parser(env.height, env.width, argv[1], &env);
-		manage_color(&env);
+		set_color(&env);
+		env.curr_tab = make_array(env.height, env.width);
+		set_or_to_curr(&env);
 		/*set_default_zoom(&env);
 		isometry(&env);
 		//parallel(&env);

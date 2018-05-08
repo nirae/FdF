@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 15:24:58 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/04 13:50:55 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/08 16:00:17 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		apply_proj(t_env *env, int proj)
 	else if (proj != BASIC)
 	{
 		env->proj = BASIC;
-		reset_to_or(env);
+		set_or_to_curr(env);
 		set_default_zoom(env);
 		set_default_start(env);
 	}
@@ -30,7 +30,7 @@ void		apply_proj(t_env *env, int proj)
 
 void		change_proj(t_env *env, int proj)
 {
-	reset_to_or(env);
+	set_or_to_curr(env);
 	set_default_zoom(env);
 	apply_proj(env, proj);
 	set_default_start(env);

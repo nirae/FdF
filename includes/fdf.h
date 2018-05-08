@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 21:32:41 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/07 23:55:22 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/08 18:18:24 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 */
 
 # define D_M_WIDTH WIN_WIDTH
-# define D_M_HEIGHT	30
+# define D_M_HEIGHT	50
 # define D_M_COLOR	T_M_COLOR
 
 /*
@@ -65,6 +65,9 @@
 # define ROW1	25
 # define ROW2	42
 # define ROW3	59
+
+# define D_COL2 D_M_WIDTH / 3
+# define D_CENTER WIN_HEIGHT - 40
 
 # define TEXT_COLOR	0xECF0F1
 # define TEXT_ACTIVE 0xF1C40F
@@ -92,7 +95,9 @@
 **	Errors
 */
 
-
+# define ERR_OPEN	-665
+# define ERR_MALLOC	-666
+# define ERR_FILE	-664
 
 typedef struct		s_seg
 {
@@ -155,7 +160,6 @@ int					get_width(char *file);
 int					if_width_valid(char *line, int width);
 t_pixel				**make_array(int height, int width);
 t_pixel				**parser(int height, int width, char *file, t_env *env);
-void				manage_color(t_env *env);
 t_pixel				create_pixel(int x, int y, int z, int color);
 // start
 void				add_start(t_env *env);
@@ -163,11 +167,31 @@ void				move_start(t_env *env, int x, int y);
 void				set_default_start(t_env *env);
 
 /*
+** Color (src/set_color.c)
+*/
+void				set_color(t_env *env);
+
+/*
 **	Menu (src/menu.c)
 */
 
 void				fill_menu_bars(t_env *env);
 void				print_keybinds(t_env *env);
+
+/*
+** Cleaning (src/free_env.c)
+*/
+void				free_env(t_env *env);
+
+/*
+** Quit (src/quit.c)
+*/
+void				quit_fdf(t_env *env);
+
+/*
+** Errors management (src/errors.c)
+*/
+void				errors(int error);
 
 // zoom
 void				add_zoom(t_env *env);
@@ -181,7 +205,7 @@ void				parallel(t_env *env);
 void				apply_proj(t_env *env, int proj);
 void				change_proj(t_env *env, int proj);
 
-void				reset_to_or(t_env *env);
+void				set_or_to_curr(t_env *env);
 
 
 

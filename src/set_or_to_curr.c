@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_height.c                                       :+:      :+:    :+:   */
+/*   reset_to_or.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/17 12:45:40 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/08 18:10:38 by ndubouil         ###   ########.fr       */
+/*   Created: 2018/04/27 15:06:38 by ndubouil          #+#    #+#             */
+/*   Updated: 2018/05/08 15:58:44 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 /*
-**	Get the height of the grid
-**	Call the errors() function if open failed
+**	Put the original tab informations in the current tab
 */
 
-int		get_height(char *file)
+void		set_or_to_curr(t_env *env)
 {
-	int		fd;
-	char	*line;
 	int		i;
+	int		ii;
 
-	if ((fd = open(file, O_RDONLY)) < 0)
-			errors(ERR_OPEN); // Erreur d'ouverture du fichier
-	i = 0;
-	while (get_next_line(fd, &line) > 0)
+	i = -1;
+	while (++i < env->height)
 	{
-		i++;
-		ft_strdel(&line);
+		ii = -1;
+		while (++ii < env->width)
+		{
+			env->curr_tab[i][ii].x = env->or_tab[i][ii].x;
+			env->curr_tab[i][ii].y = env->or_tab[i][ii].y;
+			env->curr_tab[i][ii].z = env->or_tab[i][ii].z;
+			env->curr_tab[i][ii].color = env->or_tab[i][ii].color;
+		}
 	}
-	ft_strdel(&line);
-	close(fd);
-	return(i);
 }

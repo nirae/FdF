@@ -6,7 +6,7 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:28:24 by ndubouil          #+#    #+#              #
-#    Updated: 2018/05/07 20:42:44 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/05/08 18:19:07 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,11 +35,15 @@ SRCS	=	$(SRC)fill_pixel.c		\
 			$(SRC)make_array.c		\
 			$(SRC)create_pixel.c	\
 			$(SRC)start_points.c	\
-			$(SRC)reset_to_or.c		\
+			$(SRC)set_or_to_curr.c	\
 			$(SRC)zoom.c			\
 			$(SRC)projections.c		\
 			$(SRC)fill_square.c		\
-			$(SRC)menu.c
+			$(SRC)menu.c			\
+			$(SRC)set_color.c		\
+			$(SRC)errors.c			\
+			$(SRC)free_env.c		\
+			$(SRC)quit.c
 OBJ		=	$(patsubst %.c,%.o,$(SRCS))
 # Name
 NAME	=	fdf

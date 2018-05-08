@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 20:27:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/07 22:08:03 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/08 17:10:37 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,6 @@ void		print_keybinds(t_env *env)
 							"Zoom : + / -");
 	mlx_string_put(env->mlx_ptr, env->win_ptr, COL3, ROW1, TEXT_COLOR,
 							"Move : UP / DOWN / LEFT / RIGHT");
+	mlx_string_put(env->mlx_ptr, env->win_ptr, D_COL2, D_CENTER, TEXT_COLOR,
+							"Made with <3 for Theo");
 }
