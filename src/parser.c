@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 12:53:53 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/08 22:45:16 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/09 15:02:28 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,14 @@ t_pixel			**parser(int height, int width, char *file, t_env *env)
 
 static void		free_tab(char ***tab)
 {
-	/*int		i;
+	int		i;
 
 	i = 0;
-	while (*tab[i])
+	while ((*tab)[i])
 	{
-		//ft_strdel(tab[i]);
-		printf("%d\n", i);
+		ft_strdel(&(*tab)[i]);
 		i++;
-	}*/
+	}
 	ft_memdel((void **)tab);
 }
 

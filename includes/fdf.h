@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 21:32:41 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/08 18:18:24 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/09 11:58:45 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 */
 
 # define WIN_WIDTH	1000
-# define WIN_HEIGHT	800
+# define WIN_HEIGHT	1000
 
 /*
 ** Top Menu dimensions
@@ -89,7 +89,7 @@
 # define ISO		998
 # define PARA		997
 # define CTE1		1
-# define CTE2		2
+# define CTE2		1
 
 /*
 **	Errors
