@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 15:08:49 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/08 15:59:26 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/13 23:50:50 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 
 /*
-**	Applique le zoom de env
+**	Apply the zoom in the env struct in the map
 */
 void		add_zoom(t_env *env)
 {
@@ -35,12 +35,12 @@ void		add_zoom(t_env *env)
 								);
 		}
 	}
-	printf("zoom : %d\n", env->zoom);
 }
 
 /*
-**	Applique le zoom par defaut
+**	Calculate and add the default zoom
 */
+
 void		set_default_zoom(t_env *env)
 {
 	int		y_coeff;
@@ -67,36 +67,13 @@ void		set_default_zoom(t_env *env)
 }
 
 /*
-**	Enleve le zoom actuellement applique
-*/
-void		reset_zoom(t_env *env)
-{
-	int		i;
-	int		ii;
-
-	i = -1;
-	while (++i < env->height)
-	{
-		ii = -1;
-		while (++ii < env->width)
-		{
-			env->curr_tab[i][ii].x = (env->curr_tab[i][ii].x / env->zoom);
-			env->curr_tab[i][ii].y = (env->curr_tab[i][ii].y / env->zoom);
-		}
-	}
-
-}
-
-/*
-** Appliquer un zoom specifique manuellement
+**	Add a specific zoom manually
 */
 void		set_zoom(t_env *env, int zoom)
 {
-	//reset_zoom(env);
 	set_or_to_curr(env);
 	env->zoom = zoom;
 	add_zoom(env);
-	printf("proj  : %d\n", env->proj);
 	apply_proj(env, env->proj);
 	add_start(env);
 }

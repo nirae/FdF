@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 21:32:41 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/09 11:58:45 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/14 00:05:11 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
 # include <fcntl.h>
 
 # include "mlx.h"
+
+# include "mlx_keycode.h"
 
 # include "libft.h"
 # include "get_next_line.h"
@@ -98,6 +99,7 @@
 # define ERR_OPEN	-665
 # define ERR_MALLOC	-666
 # define ERR_FILE	-664
+# define ERR_WIDTH	-663
 
 typedef struct		s_seg
 {
@@ -154,17 +156,32 @@ typedef struct		s_env
 void				fill_pixel(t_env *env, int x, int y, int color);
 void				fill_segment(t_env *env, t_pixel first, t_pixel second);
 void				fill_square(t_pixel start, int width, int height, t_env *env);
+void				fill_img(t_env * env);
 
+/*
+**	Managing images and windows
+*/
+
+void				create_img(t_env *env);
+void				put_to_window(t_env *env);
+
+/*
+**	Starts points (src/start_points.c) 
+*/
+void				add_start(t_env *env);
+void				move_start(t_env *env, int x, int y);
+void				set_default_start(t_env *env);
+
+/*
+** Parsing (src/parser.c, etc)
+*/
+t_pixel				**parser(char *file, t_env *env);
 int					get_height(char *file);
 int					get_width(char *file);
 int					if_width_valid(char *line, int width);
 t_pixel				**make_array(int height, int width);
-t_pixel				**parser(int height, int width, char *file, t_env *env);
 t_pixel				create_pixel(int x, int y, int z, int color);
-// start
-void				add_start(t_env *env);
-void				move_start(t_env *env, int x, int y);
-void				set_default_start(t_env *env);
+void				set_or_to_curr(t_env *env);
 
 /*
 ** Color (src/set_color.c)
@@ -177,6 +194,11 @@ void				set_color(t_env *env);
 
 void				fill_menu_bars(t_env *env);
 void				print_keybinds(t_env *env);
+
+/*
+**	Events
+*/
+int					deal_key(int key, t_env *env);
 
 /*
 ** Cleaning (src/free_env.c)
@@ -192,21 +214,19 @@ void				quit_fdf(t_env *env);
 ** Errors management (src/errors.c)
 */
 void				errors(int error);
+void				usage(void);
 
-// zoom
+/*
+**	Zoom (src/zoom.c)
+*/
 void				add_zoom(t_env *env);
 void				set_default_zoom(t_env *env);
-void				reset_zoom(t_env *env);
 void				set_zoom(t_env *env, int zoom);
 
-// projections
-void				isometry(t_env *env);
-void				parallel(t_env *env);
+/*
+**	Projections (src/projections.c)
+*/
 void				apply_proj(t_env *env, int proj);
 void				change_proj(t_env *env, int proj);
-
-void				set_or_to_curr(t_env *env);
-
-
 
 #endif

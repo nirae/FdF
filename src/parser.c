@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 12:53:53 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/09 15:02:28 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/10 16:47:24 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,56 @@
 
 static void		free_result(int height, t_pixel ***result);
 static void		free_tab(char ***tab);
+static void		set_result(char *line, t_pixel ***result, t_env *env, int i);
 
-t_pixel			**parser(int height, int width, char *file, t_env *env)
+/*
+**	Parsing the file for put in the result array
+**	See make_array for informations about the array
+*/
+
+t_pixel			**parser(char *file, t_env *env)
 {
 	int		i;
-	int		ii;
 	char	*line;
 	int		fd;
-	char	**tab;
 	t_pixel	**result;
 
 	line = NULL;
-	result = make_array(height, width);
+	result = make_array(env->height, env->width);
 	if ((fd = open(file, O_RDONLY)) < 0)
 		errors(ERR_OPEN);
 	i = -1;
 	env->z_max = 0;
-	while (++i < height)
+	while (++i < env->height)
 	{
 		get_next_line(fd, &line);
-		if (ft_count_words(line, ' ') != width)
-		{
-			free_result(height, &result);
-			errors(ERR_FILE);
-		}
-		if (!(tab = ft_strsplit(line, ' ')))
-		{
-			free_result(height, &result);
-			errors(ERR_FILE);
-		}
-		ii = -1;
-		while (++ii < width)
-		{
-			if (ft_atoi(tab[ii]) > env->z_max)
-				env->z_max = ft_atoi(tab[ii]);
-			result[i][ii] = create_pixel(ii, i, ft_atoi(tab[ii]), ft_atoi(tab[ii]));
-		}
+		set_result(line, &result, env, i);
 		ft_strdel(&line);
-		free_tab(&tab);
 	}
 	ft_strdel(&line);
 	close(fd);
 	return (result);
+}
+
+static void		set_result(char *line, t_pixel ***result, t_env *env, int i)
+{
+	char	**tab;
+	int		ii;
+	int		z;
+
+	if (!(tab = ft_strsplit(line, ' ')))
+	{
+		free_result(env->height, result);
+		errors(ERR_MALLOC);
+	}
+	ii = -1;
+	while (++ii < env->width)
+	{
+		if ((z = ft_atoi(tab[ii])) > env->z_max)
+			env->z_max = z;
+		(*result)[i][ii] = create_pixel(ii, i, z, z);
+	}
+	free_tab(&tab);
 }
 
 static void		free_tab(char ***tab)
@@ -77,6 +85,6 @@ static void		free_result(int height, t_pixel ***result)
 
 	i = -1;
 	while (++i < height)
-		ft_memdel((void **)result[i]);
+		ft_memdel((void **)(*result)[i]);
 	ft_memdel((void **)result);
 }

@@ -6,12 +6,18 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 15:24:58 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/08 16:00:17 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/14 00:05:38 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+static void		isometry(t_env *env);
+static void		parallel(t_env *env);
+
+/*
+**	Apply the projection choosed
+*/
 void		apply_proj(t_env *env, int proj)
 {
 	env->proj = proj;
@@ -28,15 +34,27 @@ void		apply_proj(t_env *env, int proj)
 	}
 }
 
+/*
+**	Change the projection with reset the zoom and the starts points	
+*/
+
 void		change_proj(t_env *env, int proj)
 {
 	set_or_to_curr(env);
 	set_default_zoom(env);
-	apply_proj(env, proj);
+	env->proj = proj;
+	if (proj == ISO)
+		isometry(env);
+	else if (proj == PARA)
+		parallel(env);
 	set_default_start(env);
 }
 
-void		isometry(t_env *env)
+/*
+**	Calculate and add the isometry projection
+*/
+
+static void		isometry(t_env *env)
 {
 	int		i;
 	int		ii;
@@ -53,7 +71,6 @@ void		isometry(t_env *env)
 			x = env->curr_tab[i][ii].x;
 			y = env->curr_tab[i][ii].y;
 			z = env->curr_tab[i][ii].z;
-			printf("z max : %d\n", env->z_max);
 			env->curr_tab[i][ii] =
 			create_pixel(
 							(CTE1 * x - CTE2 * y),
@@ -65,7 +82,11 @@ void		isometry(t_env *env)
 	}
 }
 
-void		parallel(t_env *env)
+/*
+**	Calculate and add the isometry projection
+*/
+
+static void		parallel(t_env *env)
 {
 	int		i;
 	int		ii;

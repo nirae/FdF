@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_height.c                                       :+:      :+:    :+:   */
+/*   fill_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/17 12:45:40 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/10 16:08:47 by ndubouil         ###   ########.fr       */
+/*   Created: 2018/05/13 22:51:03 by ndubouil          #+#    #+#             */
+/*   Updated: 2018/05/13 22:51:53 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-/*
-**	Get the height of the grid
-**	Call the errors() function if open failed
-*/
-
-int		get_height(char *file)
+void	fill_img(t_env *env)
 {
-	int		fd;
-	char	*line;
 	int		i;
-	int		gnl;
+	int		ii;
 
-	if ((fd = open(file, O_RDONLY)) < 0)
-			errors(ERR_OPEN); // Erreur d'ouverture du fichier
-	i = 0;
-	while ((gnl = get_next_line(fd, &line)) > 0)
+	create_img(env);
+	i = -1;
+	while (++i < env->height)
 	{
-		i++;
-		ft_strdel(&line);
+		ii = -1;
+		while (++ii < env->width)
+		{
+			if (i != env->height - 1)
+				fill_segment(env, env->curr_tab[i][ii],
+								env->curr_tab[i + 1][ii]);
+			if (ii != env->width - 1)
+				fill_segment(env, env->curr_tab[i][ii],
+								env->curr_tab[i][ii + 1]);
+		}
 	}
-	if (i < 2)
-		errors(ERR_FILE);
-	ft_strdel(&line);
-	close(fd);
-	return(i);
 }

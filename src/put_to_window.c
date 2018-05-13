@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_height.c                                       :+:      :+:    :+:   */
+/*   put_to_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/17 12:45:40 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/10 16:08:47 by ndubouil         ###   ########.fr       */
+/*   Created: 2018/05/13 22:39:58 by ndubouil          #+#    #+#             */
+/*   Updated: 2018/05/13 22:42:32 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 /*
-**	Get the height of the grid
-**	Call the errors() function if open failed
+**	Fill the image with the map
+**	Fill the image with the menu
+**	Clear the window
+**	Put the image on the window
+**	Put the strings keybinds on the window
 */
 
-int		get_height(char *file)
+void	put_to_window(t_env *env)
 {
-	int		fd;
-	char	*line;
-	int		i;
-	int		gnl;
-
-	if ((fd = open(file, O_RDONLY)) < 0)
-			errors(ERR_OPEN); // Erreur d'ouverture du fichier
-	i = 0;
-	while ((gnl = get_next_line(fd, &line)) > 0)
-	{
-		i++;
-		ft_strdel(&line);
-	}
-	if (i < 2)
-		errors(ERR_FILE);
-	ft_strdel(&line);
-	close(fd);
-	return(i);
+	fill_img(env);
+	fill_menu_bars(env);
+	mlx_clear_window(env->mlx_ptr, env->win_ptr);
+	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->img.img_ptr, 0, 0);
+	print_keybinds(env);
 }

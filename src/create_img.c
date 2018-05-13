@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_height.c                                       :+:      :+:    :+:   */
+/*   create_img.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/17 12:45:40 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/10 16:08:47 by ndubouil         ###   ########.fr       */
+/*   Created: 2018/05/13 22:55:54 by ndubouil          #+#    #+#             */
+/*   Updated: 2018/05/13 23:02:16 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 /*
-**	Get the height of the grid
-**	Call the errors() function if open failed
+**	Create a new MLX image and put it in the env struct
+**	Destroy the old image if it's not the first time
 */
 
-int		get_height(char *file)
+void	create_img(t_env *env)
 {
-	int		fd;
-	char	*line;
-	int		i;
-	int		gnl;
-
-	if ((fd = open(file, O_RDONLY)) < 0)
-			errors(ERR_OPEN); // Erreur d'ouverture du fichier
-	i = 0;
-	while ((gnl = get_next_line(fd, &line)) > 0)
-	{
-		i++;
-		ft_strdel(&line);
-	}
-	if (i < 2)
-		errors(ERR_FILE);
-	ft_strdel(&line);
-	close(fd);
-	return(i);
+	if (env->img.img_ptr != NULL)
+		mlx_destroy_image(env->mlx_ptr, env->img.img_ptr);
+	env->img.img_ptr = mlx_new_image(env->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	env->img.data = (int *)mlx_get_data_addr(env->img.img_ptr, &env->img.bpp,
+				&env->img.size_l, &env->img.endian);
 }

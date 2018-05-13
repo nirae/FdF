@@ -6,7 +6,7 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:28:24 by ndubouil          #+#    #+#              #
-#    Updated: 2018/05/08 18:19:07 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/05/13 23:34:48 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ MLX		=	./mlx/
 H		=	./includes/
 SRC		=	./src/
 #  Files
-HFILES	=	$(H)fdf.h
+HFILES	=	$(H)fdf.h				\
+			$(H)mlx_keycode.h
 MAIN	=	main.c
 SRCS	=	$(SRC)fill_pixel.c		\
 			$(SRC)fill_segment.c	\
@@ -43,6 +44,10 @@ SRCS	=	$(SRC)fill_pixel.c		\
 			$(SRC)set_color.c		\
 			$(SRC)errors.c			\
 			$(SRC)free_env.c		\
+			$(SRC)put_to_window.c	\
+			$(SRC)fill_img.c		\
+			$(SRC)create_img.c		\
+			$(SRC)deal_key.c		\
 			$(SRC)quit.c
 OBJ		=	$(patsubst %.c,%.o,$(SRCS))
 # Name
@@ -53,7 +58,7 @@ NAME	=	fdf
 all:		$(NAME)
 		@true
 
-$(NAME):	$(OBJ) $(MAIN) $(H) $(MLX) $(LIBFT) Makefile
+$(NAME):	$(OBJ) $(MAIN) $(HFILES) $(MLX) $(LIBFT) Makefile
 		@echo "Compiling MLX ..."
 		@make -C $(MLX)
 		@echo "Compiling Libft ..."

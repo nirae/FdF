@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 12:47:05 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/08 18:10:57 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/10 17:26:58 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 **	Get the width of the file for the grid
-**	Call the errors() function if open failed
+**	Call the errors() function if open failed and if the width is not good
 */
 
 int		get_width(char *file)
@@ -22,7 +22,7 @@ int		get_width(char *file)
 	int		fd;
 	char	*line;
 	int		i;
-	char	*firstline;
+	int		width;
 
 	if ((fd = open(file, O_RDONLY)) < 0)
 		errors(ERR_OPEN); // Erreur d'ouverture du fichier
@@ -30,14 +30,18 @@ int		get_width(char *file)
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (i == 0)
-			firstline = line;
+			width = ft_count_words(line, ' ');
 		else
+		{
+			if (ft_count_words(line, ' ') != width)
+				errors(ERR_WIDTH);
+		}
 			ft_strdel(&line);
 		i++;
 	}
+	if (i < 1)
+		errors(ERR_FILE);
 	ft_strdel(&line);
-	i = ft_count_words(firstline, ' ');
-	ft_strdel(&firstline);
 	close(fd);
-	return(i);
+	return(width);
 }
