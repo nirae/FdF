@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:27:19 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/15 11:36:08 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/15 17:00:36 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ int		main(int argc, char **argv)
 	}
 	else
 		usage();
+	while (1);
 	return (0);
 }
