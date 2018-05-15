@@ -6,16 +6,16 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 15:08:49 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/13 23:50:50 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/15 16:24:14 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-
 /*
 **	Apply the zoom in the env struct in the map
 */
+
 void		add_zoom(t_env *env)
 {
 	int		i;
@@ -30,9 +30,9 @@ void		add_zoom(t_env *env)
 			env->curr_tab[i][ii] = create_pixel(
 								env->curr_tab[i][ii].x * env->zoom,
 								env->curr_tab[i][ii].y * env->zoom,
-								(env->curr_tab[i][ii].z * env->zoom) / (6 + (env->z_max / 10)),
-								env->curr_tab[i][ii].color
-								);
+								(env->curr_tab[i][ii].z * env->zoom) /
+									(6 + (env->z_max / 10)),
+								env->curr_tab[i][ii].color);
 		}
 	}
 }
@@ -50,7 +50,6 @@ void		set_default_zoom(t_env *env)
 
 	xmax = env->or_tab[env->height - 1][env->width - 1].x;
 	ymax = env->or_tab[env->height - 1][env->width - 1].y;
-
 	x_coeff = 0;
 	y_coeff = 0;
 	while (xmax * x_coeff <= WS_WIDTH)
@@ -69,6 +68,7 @@ void		set_default_zoom(t_env *env)
 /*
 **	Add a specific zoom manually
 */
+
 void		set_zoom(t_env *env, int zoom)
 {
 	set_or_to_curr(env);

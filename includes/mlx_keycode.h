@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/13 22:45:50 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/13 22:48:03 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/15 10:30:30 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 **	Credit : https://github.com/Adgeff/mlx_keycode/blob/master/mlx_keycode.h
 **	Header for the MLX events
 **	More informations about the events at :
-**	https://tronche.com/gui/x/xlib/events/processing-overview.html#ButtonReleaseMask
+**	https://tronche.com/gui/x/xlib/events
+**								/processing-overview.html#ButtonReleaseMask
 */
 
 #ifndef MLX_KEYCODE_H

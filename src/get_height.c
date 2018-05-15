@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 12:45:40 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/10 16:08:47 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/15 11:09:56 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		get_height(char *file)
 	int		gnl;
 
 	if ((fd = open(file, O_RDONLY)) < 0)
-			errors(ERR_OPEN); // Erreur d'ouverture du fichier
+		errors(ERR_OPEN);
 	i = 0;
 	while ((gnl = get_next_line(fd, &line)) > 0)
 	{
@@ -36,5 +36,5 @@ int		get_height(char *file)
 		errors(ERR_FILE);
 	ft_strdel(&line);
 	close(fd);
-	return(i);
+	return (i);
 }

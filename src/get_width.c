@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 12:47:05 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/10 17:26:58 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/15 11:14:19 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		get_width(char *file)
 	int		width;
 
 	if ((fd = open(file, O_RDONLY)) < 0)
-		errors(ERR_OPEN); // Erreur d'ouverture du fichier
+		errors(ERR_OPEN);
 	i = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
@@ -36,12 +36,12 @@ int		get_width(char *file)
 			if (ft_count_words(line, ' ') != width)
 				errors(ERR_WIDTH);
 		}
-			ft_strdel(&line);
+		ft_strdel(&line);
 		i++;
 	}
 	if (i < 1)
 		errors(ERR_FILE);
 	ft_strdel(&line);
 	close(fd);
-	return(width);
+	return (width);
 }

@@ -6,24 +6,29 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:28:24 by ndubouil          #+#    #+#              #
-#    Updated: 2018/05/13 23:34:48 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/05/15 16:25:41 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Binaries and Flags
+
 CC		=	/usr/bin/gcc
 AR		=	/usr/bin/ar
 RANLIB	=	/usr/bin/ranlib
 RM		=	/bin/rm
 CFLAGS	=	-Wall -Wextra -Werror
 LFLAGS	=	-framework OpenGL -framework Appkit
+
 # Directories
+
 LIBFT	=	./libft/
 ILIBFT	=	./$(LIBFT)includes/
 MLX		=	./mlx/
 H		=	./includes/
 SRC		=	./src/
+
 #  Files
+
 HFILES	=	$(H)fdf.h				\
 			$(H)mlx_keycode.h
 MAIN	=	main.c
@@ -48,9 +53,12 @@ SRCS	=	$(SRC)fill_pixel.c		\
 			$(SRC)fill_img.c		\
 			$(SRC)create_img.c		\
 			$(SRC)deal_key.c		\
+			$(SRC)center.c			\
 			$(SRC)quit.c
 OBJ		=	$(patsubst %.c,%.o,$(SRCS))
+
 # Name
+
 NAME	=	fdf
 
 .PHONY: all clean fclean re

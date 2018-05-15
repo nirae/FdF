@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 13:08:14 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/08 18:33:15 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/15 14:54:44 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 /*
 **	Params : height, width
-**	Return : 2 dimensional array of t_pixel structure or ERR_MALLOC if malloc 
+**	Return : 2 dimensional array of t_pixel structure or ERR_MALLOC if malloc
 **			failed
 **	Example of an array that will be returned :
 ** 		height (Y) : 3
 **		width (X) : 4
 **														 		X
 **			0 ____________________________________________________
-**			| {x, y, z} | {x, y, z} | {x, y, z} | {x, y, z} | NULL
+**			| {x, y, z} | {x, y, z} | {x, y, z} | {x, y, z}
 **			| ----------------------------------------------------
-**			| {x, y, z} | {x, y, z} | {x, y, z} | {x, y, z} | NULL
+**			| {x, y, z} | {x, y, z} | {x, y, z} | {x, y, z}
 **			| ----------------------------------------------------
-**		 Y	| {x, y, z} | {x, y, z} | {x, y, z} | {x, y, z} | NULL
+**		 Y	| {x, y, z} | {x, y, z} | {x, y, z} | {x, y, z}
 **			| ----------------------------------------------------
-**			|	NULL	|	NULL	|	NULL	|	NULL	|
 */
+
 t_pixel			**make_array(int height, int width)
 {
 	int			i;
-	int 		ii;
+	int			ii;
 	t_pixel		**tab;
 
 	tab = NULL;

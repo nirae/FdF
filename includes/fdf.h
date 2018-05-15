@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 21:32:41 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/14 00:05:11 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/15 14:54:46 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,30 @@
 # include "libft.h"
 # include "get_next_line.h"
 
-# define WHITE		0xFFFFFF
+# define WHITE 0xFFFFFF
+
 /*
 ** Window dimensions
 */
 
-# define WIN_WIDTH	1000
-# define WIN_HEIGHT	1000
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 1000
 
 /*
 ** Top Menu dimensions
 */
 
-# define T_M_WIDTH	WIN_WIDTH
-# define T_M_HEIGHT	100
-# define T_M_COLOR	0x34495E
+# define T_M_WIDTH WIN_WIDTH
+# define T_M_HEIGHT 100
+# define T_M_COLOR 0x34495E
 
 /*
 **	Down Menu dimensions
 */
 
 # define D_M_WIDTH WIN_WIDTH
-# define D_M_HEIGHT	50
-# define D_M_COLOR	T_M_COLOR
+# define D_M_HEIGHT 50
+# define D_M_COLOR T_M_COLOR
 
 /*
 **	Borders
@@ -59,13 +60,13 @@
 ** Text Menu
 */
 
-# define COL1	5
-# define COL2	T_M_WIDTH / 3
-# define COL3	COL2 * 2
+# define COL1 5
+# define COL2 T_M_WIDTH / 3
+# define COL3 COL2 * 2
 
-# define ROW1	25
-# define ROW2	42
-# define ROW3	59
+# define ROW1 25
+# define ROW2 42
+# define ROW3 59
 
 # define D_COL2 D_M_WIDTH / 3
 # define D_CENTER WIN_HEIGHT - 40
@@ -73,33 +74,32 @@
 # define TEXT_COLOR	0xECF0F1
 # define TEXT_ACTIVE 0xF1C40F
 
-
 /*
 ** Workspace dimensions
 */
 
-# define MARGIN		100
-# define WS_WIDTH	WIN_WIDTH - MARGIN
-# define WS_HEIGHT	WIN_HEIGHT - (T_M_HEIGHT + D_M_HEIGHT)
+# define MARGIN 100
+# define WS_WIDTH WIN_WIDTH - MARGIN
+# define WS_HEIGHT WIN_HEIGHT - (T_M_HEIGHT + D_M_HEIGHT)
 
 /*
 **	Projections
 */
 
-# define BASIC		999
-# define ISO		998
-# define PARA		997
-# define CTE1		1
-# define CTE2		1
+# define BASIC 999
+# define ISO 998
+# define PARA 997
+# define CTE1 1
+# define CTE2 1
 
 /*
 **	Errors
 */
 
-# define ERR_OPEN	-665
-# define ERR_MALLOC	-666
-# define ERR_FILE	-664
-# define ERR_WIDTH	-663
+# define ERR_OPEN -665
+# define ERR_MALLOC -666
+# define ERR_FILE -664
+# define ERR_WIDTH -663
 
 typedef struct		s_seg
 {
@@ -155,8 +155,9 @@ typedef struct		s_env
 
 void				fill_pixel(t_env *env, int x, int y, int color);
 void				fill_segment(t_env *env, t_pixel first, t_pixel second);
-void				fill_square(t_pixel start, int width, int height, t_env *env);
-void				fill_img(t_env * env);
+void				fill_square(t_pixel start, int width, int height,
+									t_env *env);
+void				fill_img(t_env *env);
 
 /*
 **	Managing images and windows
@@ -166,11 +167,14 @@ void				create_img(t_env *env);
 void				put_to_window(t_env *env);
 
 /*
-**	Starts points (src/start_points.c) 
+**	Starts points (src/start_points.c)
 */
+
 void				add_start(t_env *env);
 void				move_start(t_env *env, int x, int y);
 void				set_default_start(t_env *env);
+void				set_or_center(t_env *env);
+void				set_curr_center(t_env *env);
 
 /*
 ** Parsing (src/parser.c, etc)

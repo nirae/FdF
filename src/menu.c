@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 20:27:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/08 17:10:37 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/15 11:22:25 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 ** Top bar, top bar border, down bart, down bar border
 */
 
-void		fill_menu_bars(t_env *env)
+void			fill_menu_bars(t_env *env)
 {
 	t_pixel start;
 
 	start = create_pixel(0, 0, 0, T_M_COLOR);
 	fill_square(start, T_M_WIDTH, T_M_HEIGHT, env);
 	start = create_pixel(0, (T_M_HEIGHT - B_HEIGHT), 0, B_COLOR);
-	fill_square(start, T_M_WIDTH, B_HEIGHT, env);	
+	fill_square(start, T_M_WIDTH, B_HEIGHT, env);
 	start = create_pixel(0, (WIN_HEIGHT - D_M_HEIGHT), 0, D_M_COLOR);
 	fill_square(start, D_M_WIDTH, D_M_HEIGHT, env);
 	start = create_pixel(0, (WIN_HEIGHT - D_M_HEIGHT), 0, B_COLOR);
@@ -32,10 +32,10 @@ void		fill_menu_bars(t_env *env)
 }
 
 /*
-**	Print the instructions in the menu
+**	FUCK THE NORM
 */
 
-void		print_keybinds(t_env *env)
+static void		top(t_env *env)
 {
 	mlx_string_put(env->mlx_ptr, env->win_ptr, COL1, 0, TEXT_COLOR,
 							"KEYBINDS :");
@@ -61,6 +61,15 @@ void		print_keybinds(t_env *env)
 							"Zoom : + / -");
 	mlx_string_put(env->mlx_ptr, env->win_ptr, COL3, ROW1, TEXT_COLOR,
 							"Move : UP / DOWN / LEFT / RIGHT");
+}
+
+/*
+**	Print the instructions in the menu
+*/
+
+void			print_keybinds(t_env *env)
+{
+	top(env);
 	mlx_string_put(env->mlx_ptr, env->win_ptr, D_COL2, D_CENTER, TEXT_COLOR,
 							"Made with <3 for Theo");
 }
